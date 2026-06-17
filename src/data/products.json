@@ -1,0 +1,68 @@
+[
+  {
+    "id": 1,
+    "name": "UV Protection Sunglasses",
+    "brand": "SunShade",
+    "price": 15,
+    "rating": 4.7,
+    "stock": 10,
+    "description": "Stylish UV protection sunglasses perfect for summer beach outings.",
+    "image": "https://images.unsplash.com/photo-1511556532299-8f662fc26c06?w=600",
+    "category": "Accessories"
+  },
+  {
+    "id": 2,
+    "name": "Hydrating Mineral Sunscreen",
+    "brand": "GlowBeach",
+    "price": 18,
+    "rating": 4.5,
+    "stock": 25,
+    "description": "Broad-spectrum SPF 50 sunscreen keeping your skin safe and hydrated.",
+    "image": "https://images.unsplash.com/photo-1598440947619-2c35fc9aa908?w=600",
+    "category": "Skincare"
+  },
+  {
+    "id": 3,
+    "name": "Unisex Linen Summer Shirt",
+    "brand": "BreezeWear",
+    "price": 32,
+    "rating": 4.8,
+    "stock": 8,
+    "description": "Ultra-breathable 100% linen shirt designed to keep you cool.",
+    "image": "https://images.unsplash.com/photo-1596755094514-f87e34085b2c?w=600",
+    "category": "Apparel"
+  },
+  {
+    "id": 4,
+    "name": "Quick-Dry Beach Towel",
+    "brand": "SandFree",
+    "price": 12,
+    "rating": 4.3,
+    "stock": 15,
+    "description": "Microfiber, sand-resistant towel that dries three times faster than cotton.",
+    "image": "https://images.unsplash.com/photo-1576016770956-debb63d900bb?w=600",
+    "category": "Accessories"
+  },
+  {
+    "id": 5,
+    "name": "Insulated Stainless Steel Flask",
+    "brand": "HydroChill",
+    "price": 22,
+    "rating": 4.9,
+    "stock": 20,
+    "description": "Keep your water ice-cold for up to 24 hours during blazing hot days.",
+    "image": "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=600",
+    "category": "Accessories"
+  },
+  {
+    "id": 6,
+    "name": "Aloe Vera Soothing Gel",
+    "brand": "GlowBeach",
+    "price": 9,
+    "rating": 4.6,
+    "stock": 30,
+    "description": "Instant cooling relief and hydration recovery for post-sun skin exposure.",
+    "image": "https://images.unsplash.com/photo-1556229174-5e42a09e45af?w=600",
+    "category": "Skincare"
+  }
+]
