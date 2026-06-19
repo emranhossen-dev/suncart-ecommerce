@@ -1,30 +1,20 @@
-import { betterAuth } from "better-auth";
-import { MongoClient, ServerApiVersion } from "mongodb";
+import { mongodbAdapter } from '@better-auth/mongo-adapter'
+import { betterAuth } from 'better-auth'
+import { MongoClient } from 'mongodb'
 
-const client = new MongoClient(process.env.MONGODB_URI, {
-  serverApi: {
-    version: ServerApiVersion.v1,
-    strict: true,
-    deprecationErrors: true,
-  }
-});
+const client = new MongoClient(process.env.MONGODB_URL)
+const db = client.db('Suncart_DB')
 
 export const auth = betterAuth({
-  database: {
-    provider: "mongodb",
-    mongodb: {
-      db: client.db("suncart")
-    }
-  },
-  socialProviders: {
-    google: {
-      clientId: process.env.GOOGLE_CLIENT_ID,
-      clientSecret: process.env.GOOGLE_CLIENT_SECRET,
-    },
-  },
+  database: mongodbAdapter(db, {
+    client,
+  }),
+  
+  secret: process.env.BETTER_AUTH_SECRET,
+
   user: {
     changeEmail: {
       enabled: true,
     }
   }
-});
+})
