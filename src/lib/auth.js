@@ -3,12 +3,27 @@ import { betterAuth } from 'better-auth'
 import { MongoClient } from 'mongodb'
 
 const client = new MongoClient(process.env.MONGODB_URL || "")
-const db = client.db('Suncart_DB')
+const db = client.db('SunCart_DB')
 
 export const auth = betterAuth({
   database: mongodbAdapter(db),
   
   secret: process.env.BETTER_AUTH_SECRET || "fallback_secret_for_validation_only",
+
+  databaseHooks: {
+    user: {
+      create: {
+        before: async (user) => {
+          return {
+            data: {
+              ...user,
+              id: user.id || new Date().getTime().toString()
+            }
+          }
+        }
+      }
+    }
+  },
 
   emailAndPassword: {
     enabled: true

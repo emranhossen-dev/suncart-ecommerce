@@ -1,8 +1,8 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import Link from 'next/link'
-import { ArrowRight, Star } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
 import { Swiper, SwiperSlide } from 'swiper/react'
 import { Autoplay, Pagination, EffectFade } from 'swiper/modules'
 import productsData from '@/data/products.json' 
@@ -13,13 +13,10 @@ import 'swiper/css/pagination'
 import 'swiper/css/effect-fade'
 
 export default function HomePage() {
-  const [popularProducts, setPopularProducts] = useState([])
+  const popularProducts = productsData && productsData.length > 0 ? productsData.slice(0, 3) : []
 
   useEffect(() => {
     window.scrollTo(0, 0)
-    if (productsData && productsData.length > 0) {
-      setPopularProducts(productsData.slice(0, 3))
-    }
   }, [])
 
   const carouselImages = [
