@@ -1,47 +1,92 @@
-import productsData from "@/data/products.json";
-import ProductCard from "@/components/ProductCard";
-import Link from "next/link";
+'use client'
+
+import React, { useEffect, useState } from 'react'
+import Link from 'next/link'
+import { ArrowRight, Star } from 'lucide-react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Autoplay, Pagination, EffectFade } from 'swiper/modules'
+import productsData from '@/data/products.json' 
+import ProductCard from '@/components/ProductCard'
+
+import 'swiper/css'
+import 'swiper/css/pagination'
+import 'swiper/css/effect-fade'
 
 export default function HomePage() {
-  const popularProducts = productsData.slice(0, 3);
+  const [popularProducts, setPopularProducts] = useState([])
+
+  useEffect(() => {
+    window.scrollTo(0, 0)
+    if (productsData && productsData.length > 0) {
+      setPopularProducts(productsData.slice(0, 3))
+    }
+  }, [])
+
+  const carouselImages = [
+    "https://images.unsplash.com/photo-1556228578-8c89e6adf883?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=800&q=80",
+    "https://images.unsplash.com/photo-1506157786151-b8491531f063?auto=format&fit=crop&w=800&q=80"
+  ]
 
   const careTips = [
-    { title: "Stay Hydrated", desc: "Drink at least 3 liters of water daily to maintain electrolyte levels." },
-    { title: "Sun Protection", desc: "Apply broad-spectrum SPF 50 sunscreen 15 minutes before stepping out." },
-    { title: "Wear Breathable Fabrics", desc: "Choose light-colored linen or cotton clothing to stay ventilated." }
-  ];
+    { title: "Stay Hydrated", desc: "Drink at least 3 liters of water daily to maintain electrolyte levels.", gradient: "from-amber-100 to-orange-100" },
+    { title: "Sun Protection", desc: "Apply broad-spectrum SPF 50 sunscreen 15 minutes before stepping out.", gradient: "from-orange-100 to-red-100" },
+    { title: "Wear Breathable Fabrics", desc: "Choose light-colored linen or cotton clothing to stay ventilated.", gradient: "from-yellow-100 to-amber-100" }
+  ]
 
-  const brands = ["SunShade", "GlowBeach", "BreezeWear", "HydroChill"];
+  const brands = ["SunShade", "GlowBeach", "BreezeWear", "HydroChill"]
 
   return (
-    <div className="space-y-20 pb-20">
+    <div className="space-y-24 pb-20 overflow-x-hidden">
       
-      {/* Hero Section */}
-      <section className="relative overflow-hidden bg-gradient-to-r from-amber-50 to-orange-50 py-20 lg:py-32">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 text-center lg:text-left">
-          <div className="max-w-2xl">
-            <span className="inline-block rounded-full bg-orange-100 px-4 py-1.5 text-xs font-semibold text-orange-600 animate__animated animate__fadeInDown">
-              Hot Deals 🔥
-            </span>
-            <h1 className="mt-4 text-4xl font-extrabold tracking-tight text-gray-900 sm:text-6xl animate__animated animate__fadeInLeft">
-              Summer Sale <span className="text-orange-500">50% OFF</span>
-            </h1>
-            <p className="mt-6 text-lg text-gray-600">
-              Gear up for the sun. Explore our curated premium sunglasses, apparel, and skincare designed to keep you fresh all summer long.
-            </p>
-            <div className="mt-10">
-              <Link href="/" className="rounded-xl bg-orange-500 px-6 py-3.5 text-sm font-semibold text-white shadow-sm hover:bg-orange-600">
-                Shop Collection
-              </Link>
+      <section className="relative overflow-hidden bg-gradient-to-b from-amber-50/70 via-orange-50/40 to-transparent py-16 lg:py-24">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            
+            <div className="max-w-2xl text-center lg:text-left animate__animated animate__fadeInLeft">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-50 px-4 py-1.5 text-xs font-bold text-orange-600 border border-orange-100 shadow-sm">
+                Hot Deals 🔥
+              </span>
+              <h1 className="mt-5 text-4xl font-black tracking-tight text-gray-900 sm:text-6xl lg:text-7xl leading-tight">
+                Summer Sale <span className="bg-gradient-to-r from-orange-500 to-amber-500 bg-clip-text text-transparent">50% OFF</span>
+              </h1>
+              <p className="mt-6 text-lg text-gray-600 leading-relaxed">
+                Gear up for the sun. Explore our curated premium sunglasses, apparel, and skincare designed to keep you fresh all summer long.
+              </p>
+              <div className="mt-10">
+                <Link href="/products" className="inline-flex items-center gap-2 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 px-8 py-4 text-base font-bold text-white shadow-lg shadow-orange-500/20 hover:opacity-95 transition-all transform hover:-translate-y-0.5">
+                  Shop Collection <ArrowRight className="w-5 h-5" />
+                </Link>
+              </div>
             </div>
+
+            <div className="w-full h-[350px] sm:h-[450px] rounded-[2.5rem] overflow-hidden shadow-2xl border-4 border-white animate__animated animate__fadeInRight">
+              <Swiper
+                modules={[Autoplay, Pagination, EffectFade]}
+                effect={'fade'}
+                autoplay={{ delay: 3500, disableOnInteraction: false }}
+                pagination={{ clickable: true }}
+                className="w-full h-full"
+              >
+                {carouselImages.map((imgUrl, index) => (
+                  <SwiperSlide key={index}>
+                    <img 
+                      src={imgUrl} 
+                      alt={`Summer Slide ${index + 1}`} 
+                      className="w-full h-full object-cover"
+                    />
+                  </SwiperSlide>
+                ))}
+              </Swiper>
+            </div>
+
           </div>
         </div>
       </section>
 
-      {/* Popular Products Section */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center md:text-left">
-          <h2 className="text-3xl font-bold tracking-tight text-gray-900">Popular Products</h2>
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 animate__animated animate__fadeInUp">
+        <div className="text-center md:text-left border-l-4 border-orange-500 pl-4">
+          <h2 className="text-3xl font-black tracking-tight text-gray-900">Popular Products</h2>
           <p className="mt-2 text-sm text-gray-500">Our trending summer items chosen by shoppers this week.</p>
         </div>
         <div className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -51,42 +96,44 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Summer Care Tips Section */}
-      <section className="bg-gray-50 py-16">
+      <section className="bg-gradient-to-b from-gray-50/50 to-gray-50 py-20 border-y border-gray-100/80 animate__animated animate__fadeInUp">
         <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="text-center">
-            <h2 className="text-3xl font-bold tracking-tight text-gray-900">Summer Care Tips</h2>
+          <div className="text-center max-w-xl mx-auto">
+            <span className="text-xs font-bold uppercase tracking-widest text-orange-500 bg-orange-50 px-3 py-1 rounded-full">Summer Care 101</span>
+            <h2 className="text-3xl font-black tracking-tight text-gray-900 mt-3">Summer Care Tips</h2>
             <p className="mt-2 text-sm text-gray-500">Essential habits to stay healthy and vibrant in hot weather.</p>
           </div>
           <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
             {careTips.map((tip, idx) => (
-              <div key={idx} className="rounded-2xl border border-gray-100 bg-white p-6 shadow-sm">
-                <div className="flex h-10 w-10 items-center justify-center rounded-xl bg-orange-100 text-sm font-bold text-orange-600">
-                  0{idx + 1}
+              <div key={idx} className="relative overflow-hidden rounded-3xl border border-gray-100 bg-white p-8 shadow-sm transition-all hover:shadow-xl hover:-translate-y-1 duration-300">
+                <div className={`absolute -top-8 -right-8 w-24 h-24 rounded-full bg-gradient-to-br ${tip.gradient} opacity-50 blur-xl`}></div>
+                <div className="relative">
+                  <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-orange-50 text-base font-black text-orange-600 border border-orange-100 shadow-sm">
+                    0{idx + 1}
+                  </div>
+                  <h3 className="mt-6 text-xl font-bold text-gray-800 tracking-tight">{tip.title}</h3>
+                  <p className="mt-3 text-sm text-gray-500 leading-relaxed">{tip.desc}</p>
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-gray-800">{tip.title}</h3>
-                <p className="mt-2 text-sm text-gray-500 leading-relaxed">{tip.desc}</p>
               </div>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Top Brands Section */}
-      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-900">Top Brands</h2>
-          <p className="mt-1 text-sm text-gray-500">We partner with global manufacturers to deliver top-tier materials.</p>
+      <section className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 animate__animated animate__fadeInUp">
+        <div className="text-center max-w-xl mx-auto">
+          <h2 className="text-3xl font-black text-gray-900 tracking-tight">Top Brands</h2>
+          <p className="mt-2 text-sm text-gray-500">We partner with global manufacturers to deliver top-tier materials.</p>
         </div>
-        <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
+        <div className="mt-12 grid grid-cols-2 gap-6 sm:grid-cols-4">
           {brands.map((brand, idx) => (
-            <div key={idx} className="flex h-24 items-center justify-center rounded-2xl border border-gray-100 bg-white p-4 shadow-sm hover:border-orange-200">
-              <span className="text-base font-bold tracking-wider text-gray-400 uppercase">{brand}</span>
+            <div key={idx} className="group flex h-28 items-center justify-center rounded-3xl border border-gray-100 bg-white p-6 shadow-sm hover:shadow-md hover:border-orange-200 transition-all duration-300 transform hover:-translate-y-0.5">
+              <span className="text-base font-black tracking-widest text-gray-400 group-hover:text-orange-500 transition-colors uppercase">{brand}</span>
             </div>
           ))}
         </div>
       </section>
 
     </div>
-  );
+  )
 }
