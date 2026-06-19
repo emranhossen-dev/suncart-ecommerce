@@ -1,5 +1,7 @@
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
 
 export const metadata = {
@@ -11,16 +13,12 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body className="flex min-h-screen flex-col bg-white text-gray-900 antialiased">
-        {/* Persistent Top Navigation Bar */}
         <Navbar />
-        
-        {/* Main Workspace content takes up all remaining vertical space */}
         <main className="flex-grow">
           {children}
         </main>
-
-        {/* Persistent Bottom Footer */}
         <Footer />
+        <ToastContainer position="top-right" autoClose={3000} />
       </body>
     </html>
   );
