@@ -3,6 +3,7 @@ import Footer from "@/components/Footer";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import "./globals.css";
+import 'animate.css';
 
 export const metadata = {
   title: "SunCart – Summer Essentials Store",

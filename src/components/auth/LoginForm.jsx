@@ -67,7 +67,7 @@ const LoginForm = () => {
     }
 
     return (
-        <Card className='w-full max-w-md p-8 shadow-2xl rounded-[2.5rem] border border-border bg-card text-card-foreground transition-colors duration-300'>
+        <Card className='w-full max-w-md p-8 shadow-2xl rounded-[2.5rem] border border-border bg-card text-card-foreground transition-colors duration-300 animate__animated animate__fadeInUp'>
             <div className='text-center mb-8'>
                 <div className='w-16 h-16 mx-auto bg-secondary text-primary flex items-center justify-center rounded-2xl mb-4'>
                     <Lock size={28} />

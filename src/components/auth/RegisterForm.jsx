@@ -94,31 +94,9 @@ const RegisterForm = () => {
     }
 
     return (
-        <Card
-            className='
-                w-full
-                max-w-md
-                p-8
-                shadow-2xl
-                rounded-[2.5rem]
-                border border-border
-                bg-card
-                text-card-foreground
-                transition-colors duration-300
-            '
-        >
+        <Card className='w-full max-w-md p-8 shadow-2xl rounded-[2.5rem] border border-border bg-card text-card-foreground transition-colors duration-300 animate__animated animate__fadeInUp'>
             <div className='text-center mb-8'>
-                <div
-                    className='
-                        w-16 h-16
-                        mx-auto
-                        bg-secondary
-                        text-primary
-                        flex items-center justify-center
-                        rounded-2xl
-                        mb-4
-                    '
-                >
+                <div className='w-16 h-16 mx-auto bg-secondary text-primary flex items-center justify-center rounded-2xl mb-4'>
                     <User size={28} />
                 </div>
 
@@ -170,7 +148,7 @@ const RegisterForm = () => {
                             type='text'
                             value={image}
                             onChange={(e) => setImage(e.target.value)}
-                            placeholder='https://example.com/profile.jpg'
+                            placeholder='https://suncart.com/profile.jpg'
                             className='bg-transparent text-foreground placeholder:text-muted-foreground'
                         />
                     </InputGroup>
@@ -191,7 +169,7 @@ const RegisterForm = () => {
                             type='email'
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            placeholder='hello@sweetrose.com'
+                            placeholder='hello@suncart.com'
                             className='bg-transparent text-foreground placeholder:text-muted-foreground'
                         />
                     </InputGroup>
