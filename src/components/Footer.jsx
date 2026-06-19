@@ -6,7 +6,6 @@ export default function Footer() {
       <div className="mx-auto max-w-7xl px-4 py-10 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 gap-8 md:grid-cols-3 text-center md:text-left">
           
-          {/* Brand Info */}
           <div>
             <h3 className="text-lg font-bold text-gray-900 mb-3">SunCart</h3>
             <p className="text-sm text-gray-500 max-w-sm">
@@ -21,16 +20,14 @@ export default function Footer() {
             <Link href="/" className="hover:text-orange-500 transition-colors">Terms of Service</Link>
           </div>
 
-          {/* Contact & Socials */}
           <div className="text-sm">
             <h4 className="font-semibold text-gray-900 mb-2">Contact Us</h4>
-            <p className="text-gray-500">Email: support@suncart.dev</p>
+            <p className="text-gray-500">Email: suncart@emran.work</p>
             <p className="text-gray-500 mb-4">Location: Dhaka, Bangladesh</p>
           </div>
 
         </div>
 
-        {/* Bottom Banner */}
         <div className="mt-8 border-t border-gray-200 pt-6 text-center text-xs text-gray-400">
           © {new Date().getFullYear()} SunCart Store. All rights reserved.
         </div>
