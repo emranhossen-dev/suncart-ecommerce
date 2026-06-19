@@ -16,12 +16,14 @@ const RegisterForm = () => {
     const [showPassword, setShowPassword] = useState(false)
     const [showConfirmPassword, setShowConfirmPassword] = useState(false)
 
-    const handleRegister = async (formData) => {
-        const name = formData.get('name')
-        const image = formData.get('image')
-        const email = formData.get('email')
-        const password = formData.get('password')
-        const confirmPassword = formData.get('confirmPassword')
+    const [name, setName] = useState('')
+    const [image, setImage] = useState('')
+    const [email, setEmail] = useState('')
+    const [password, setPassword] = useState('')
+    const [confirmPassword, setConfirmPassword] = useState('')
+
+    const handleRegister = async (e) => {
+        e.preventDefault()
 
         if (password !== confirmPassword) {
             toast.warning('Passwords do not match', {
@@ -45,13 +47,12 @@ const RegisterForm = () => {
                     name,
                     email,
                     password,
-                    image,
+                    image: image || undefined,
                 },
                 {
                     onRequest: () => {
                         setLoading(true)
                     },
-
                     onSuccess: () => {
                         setLoading(false)
                         toast.success(
@@ -63,7 +64,6 @@ const RegisterForm = () => {
                         )
                         router.push('/login')
                     },
-
                     onError: (ctx) => {
                         setLoading(false)
                         toast.error(
@@ -131,28 +131,22 @@ const RegisterForm = () => {
                 </p>
             </div>
 
-            <form action={handleRegister} className='space-y-5'>
+            <form onSubmit={handleRegister} className='space-y-5'>
                 <TextField isRequired>
                     <Label className='text-foreground font-medium mb-2'>Full Name</Label>
 
                     <InputGroup
                         fullWidth
-                        className='
-                            bg-secondary
-                            border border-border
-                            rounded-2xl
-                            px-3
-                            focus-within:ring-2
-                            focus-within:ring-primary/20
-                        '
+                        className='bg-secondary border border-border rounded-2xl px-3 focus-within:ring-2 focus-within:ring-primary/20'
                     >
                         <InputGroup.Prefix>
                             <User size={18} className='text-primary' />
                         </InputGroup.Prefix>
 
                         <InputGroup.Input
-                            name='name'
                             type='text'
+                            value={name}
+                            onChange={(e) => setName(e.target.value)}
                             placeholder='John Doe'
                             className='bg-transparent text-foreground placeholder:text-muted-foreground'
                         />
@@ -166,22 +160,16 @@ const RegisterForm = () => {
 
                     <InputGroup
                         fullWidth
-                        className='
-                            bg-secondary
-                            border border-border
-                            rounded-2xl
-                            px-3
-                            focus-within:ring-2
-                            focus-within:ring-primary/20
-                        '
+                        className='bg-secondary border border-border rounded-2xl px-3 focus-within:ring-2 focus-within:ring-primary/20'
                     >
                         <InputGroup.Prefix>
                             <ImageIcon size={18} className='text-primary' />
                         </InputGroup.Prefix>
 
                         <InputGroup.Input
-                            name='image'
                             type='text'
+                            value={image}
+                            onChange={(e) => setImage(e.target.value)}
                             placeholder='https://example.com/profile.jpg'
                             className='bg-transparent text-foreground placeholder:text-muted-foreground'
                         />
@@ -193,22 +181,16 @@ const RegisterForm = () => {
 
                     <InputGroup
                         fullWidth
-                        className='
-                            bg-secondary
-                            border border-border
-                            rounded-2xl
-                            px-3
-                            focus-within:ring-2
-                            focus-within:ring-primary/20
-                        '
+                        className='bg-secondary border border-border rounded-2xl px-3 focus-within:ring-2 focus-within:ring-primary/20'
                     >
                         <InputGroup.Prefix>
                             <Mail size={18} className='text-primary' />
                         </InputGroup.Prefix>
 
                         <InputGroup.Input
-                            name='email'
                             type='email'
+                            value={email}
+                            onChange={(e) => setEmail(e.target.value)}
                             placeholder='hello@sweetrose.com'
                             className='bg-transparent text-foreground placeholder:text-muted-foreground'
                         />
@@ -220,22 +202,16 @@ const RegisterForm = () => {
 
                     <InputGroup
                         fullWidth
-                        className='
-                            bg-secondary
-                            border border-border
-                            rounded-2xl
-                            px-3
-                            focus-within:ring-2
-                            focus-within:ring-primary/20
-                        '
+                        className='bg-secondary border border-border rounded-2xl px-3 focus-within:ring-2 focus-within:ring-primary/20'
                     >
                         <InputGroup.Prefix>
                             <Lock size={18} className='text-primary' />
                         </InputGroup.Prefix>
 
                         <InputGroup.Input
-                            name='password'
                             type={showPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={(e) => setPassword(e.target.value)}
                             placeholder='••••••••'
                             className='bg-transparent text-foreground placeholder:text-muted-foreground'
                         />
@@ -259,22 +235,16 @@ const RegisterForm = () => {
 
                     <InputGroup
                         fullWidth
-                        className='
-                            bg-secondary
-                            border border-border
-                            rounded-2xl
-                            px-3
-                            focus-within:ring-2
-                            focus-within:ring-primary/20
-                        '
+                        className='bg-secondary border border-border rounded-2xl px-3 focus-within:ring-2 focus-within:ring-primary/20'
                     >
                         <InputGroup.Prefix>
                             <Lock size={18} className='text-primary' />
                         </InputGroup.Prefix>
 
                         <InputGroup.Input
-                            name='confirmPassword'
                             type={showConfirmPassword ? 'text' : 'password'}
+                            value={confirmPassword}
+                            onChange={(e) => setConfirmPassword(e.target.value)}
                             placeholder='••••••••'
                             className='bg-transparent text-foreground placeholder:text-muted-foreground'
                         />
@@ -294,14 +264,7 @@ const RegisterForm = () => {
                 <Button
                     type='submit'
                     isLoading={loading}
-                    className='
-                        w-full
-                        bg-primary
-                        text-primary-foreground
-                        font-bold
-                        rounded-2xl
-                        h-12
-                    '
+                    className='w-full bg-primary text-primary-foreground font-bold rounded-2xl h-12'
                 >
                     Create Account
                 </Button>
@@ -314,13 +277,7 @@ const RegisterForm = () => {
 
                 <Button
                     variant='secondary'
-                    className='
-                        w-full
-                        bg-secondary
-                        text-foreground
-                        border border-border
-                        rounded-2xl
-                    '
+                    className='w-full bg-secondary text-foreground border border-border rounded-2xl'
                     onPress={handleGoogleLogin}
                 >
                     <FcGoogle size={20} />
