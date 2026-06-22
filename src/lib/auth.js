@@ -1,6 +1,10 @@
 import { mongodbAdapter } from '@better-auth/mongo-adapter'
 import { betterAuth } from 'better-auth'
 import { MongoClient } from 'mongodb'
+import dns from 'node:dns'
+
+// Force Node.js to use public DNS servers to properly resolve MongoDB SRV records
+dns.setServers(['1.1.1.1', '8.8.8.8'])
 
 const client = new MongoClient(process.env.MONGODB_URL || "")
 const db = client.db('SunCart_DB')
