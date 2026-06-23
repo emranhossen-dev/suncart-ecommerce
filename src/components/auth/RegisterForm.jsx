@@ -22,22 +22,10 @@ const RegisterForm = () => {
     const [password, setPassword] = useState('')
     const [confirmPassword, setConfirmPassword] = useState('')
 
-    const clientLog = async (message, data) => {
-        try {
-            await fetch('/api/debug-log', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ message, data })
-            });
-        } catch(e) {}
-    }
-
     const handleRegister = async (e) => {
         e.preventDefault()
-        await clientLog('handleRegister called', { name, email, passwordLength: password.length, confirmPasswordLength: confirmPassword.length });
 
         if (password !== confirmPassword) {
-            await clientLog('Validation failed: Passwords do not match');
             toast.warning('Passwords do not match', {
                 position: 'top-right',
                 autoClose: 4000,
@@ -46,7 +34,6 @@ const RegisterForm = () => {
         }
 
         if (password.length < 8) {
-            await clientLog('Validation failed: Password too short');
             toast.warning('Password must be at least 8 characters', {
                 position: 'top-right',
                 autoClose: 4000,
@@ -55,7 +42,6 @@ const RegisterForm = () => {
         }
 
         try {
-            await clientLog('Calling authClient.signUp.email...');
             await authClient.signUp.email(
                 {
                     name,
@@ -65,11 +51,9 @@ const RegisterForm = () => {
                 },
                 {
                     onRequest: () => {
-                        clientLog('onRequest callback triggered');
                         setLoading(true)
                     },
-                    onSuccess: (ctx) => {
-                        clientLog('onSuccess callback triggered', ctx);
+                    onSuccess: () => {
                         setLoading(false)
                         toast.success(
                             'Account created successfully! Welcome to SunCart',
@@ -81,11 +65,6 @@ const RegisterForm = () => {
                         router.push('/login')
                     },
                     onError: (ctx) => {
-                        clientLog('onError callback triggered', {
-                            error: ctx.error,
-                            message: ctx.error?.message,
-                            status: ctx.error?.status
-                        });
                         setLoading(false)
                         toast.error(
                             ctx.error.message || 'Registration failed. Please try again',
@@ -98,7 +77,6 @@ const RegisterForm = () => {
                 },
             )
         } catch (err) {
-            await clientLog('Catch block triggered', { message: err.message, name: err.name, stack: err.stack });
             setLoading(false)
             toast.error('Something went wrong', {
                 position: 'top-right',
@@ -107,6 +85,7 @@ const RegisterForm = () => {
             console.log(err)
         }
     }
+
 
 
     const handleGoogleLogin = async () => {
