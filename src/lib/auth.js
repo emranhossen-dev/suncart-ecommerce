@@ -1,12 +1,6 @@
 import { mongodbAdapter } from '@better-auth/mongo-adapter'
 import { betterAuth } from 'better-auth'
 import { MongoClient } from 'mongodb'
-import dns from 'node:dns'
-
-// Force Node.js to use public DNS servers to properly resolve MongoDB SRV records
-console.log('[Auth] Setting DNS servers to 1.1.1.1 and 8.8.8.8');
-dns.setServers(['1.1.1.1', '8.8.8.8']);
-console.log('[Auth] Active DNS servers:', dns.getServers());
 
 let client
 
