@@ -56,7 +56,7 @@ const RegisterForm = () => {
                     onSuccess: () => {
                         setLoading(false)
                         toast.success(
-                            'Account created successfully! 🌸 Welcome to SunCart',
+                            'Account created successfully! Welcome to SunCart',
                             {
                                 position: 'top-right',
                                 autoClose: 3000,

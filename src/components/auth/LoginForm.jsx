@@ -33,7 +33,7 @@ const LoginForm = () => {
                     },
                     onSuccess: () => {
                         setLoading(false)
-                        toast.success('Welcome back! 🌸 Login successful', {
+                        toast.success('Welcome back! Login successful', {
                             position: 'top-right',
                             autoClose: 3000,
                         })

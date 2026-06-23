@@ -3,7 +3,6 @@ import { betterAuth } from 'better-auth'
 import { MongoClient } from 'mongodb'
 import dns from 'node:dns'
 
-// Force Node.js to use public DNS servers to properly resolve MongoDB SRV records
 dns.setServers(['1.1.1.1', '8.8.8.8'])
 
 const client = new MongoClient(process.env.MONGODB_URL || "")
@@ -16,13 +15,11 @@ export const auth = betterAuth({
 
   databaseHooks: {
     user: {
-      create: {
-        before: async (user) => {
-          return {
-            data: {
-              ...user,
-              id: user.id || new Date().getTime().toString()
-            }
+      beforeCreate: async (user) => {
+        return {
+          data: {
+            ...user,
+            id: user.id || new Date().getTime().toString()
           }
         }
       }
